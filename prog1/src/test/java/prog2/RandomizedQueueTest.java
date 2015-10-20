@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.NoSuchElementException;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import edu.princeton.cs.algs4.StdOut;
@@ -153,7 +151,5 @@ public class RandomizedQueueTest {
 	private static int EMPTY_COUNT = 0;
 	private static int SIZE_1_COUNT = 1;
 	private static int SIZE_2_COUNT = 2;
-	private static int SIZE_3_COUNT = 3;
-	private static int SIZE_4_COUNT = 4;
 	private static int SIZE_5_COUNT = 5;
 }
