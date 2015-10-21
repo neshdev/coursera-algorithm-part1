@@ -104,7 +104,7 @@ public class Point implements Comparable<Point> {
         /* YOUR CODE HERE */
     	return new PointOrder();
     }
-    
+        
     private class PointOrder implements Comparator<Point>{
 
 		public int compare(Point o1, Point o2) {
@@ -117,7 +117,6 @@ public class Point implements Comparable<Point> {
 		}
     	
     }
-
 
     /**
      * Returns a string representation of this point.

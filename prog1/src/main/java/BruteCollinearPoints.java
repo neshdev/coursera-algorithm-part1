@@ -34,58 +34,25 @@ public class BruteCollinearPoints {
 				for (int k = 2; k < points.length; k++) {
 					for (int l = 3; l < points.length; l++) {
 						Point p = points[i];
-						Point q = points[i];
-						Point r = points[i];
-						Point s = points[i];
+						Point q = points[j];
+						Point r = points[k];
+						Point s = points[l];
 						double pq = p.slopeTo(q);
 						double pr = p.slopeTo(r);
 						double ps = p.slopeTo(s);
 						if (pq == pr || pq == ps || pr == ps) {
-							Point a = min(p, q, r, s);
-							Point b = max(p, q, r, s);
-							LineSegment segment = new LineSegment(a, b);
+							
+							Point[] arr = new Point[] { p,q,r,s};
+							Arrays.sort(arr);
+							Point min = arr[0];
+							Point max = arr[arr.length - 1];
+							LineSegment segment = new LineSegment(min, max);
 							segments.add(segment);
 						}
 					}
 				}
 			}
 		}
-	}
-
-	private Point min(Point a, Point b) {
-		int results = a.compareTo(b);
-		if (results == -1)
-			return a;
-		else
-			return b;
-	}
-
-	private Point min(Point a, Point b, Point c) {
-		Point x = min(a, b);
-		return min(c, x);
-	}
-
-	private Point min(Point a, Point b, Point c, Point d) {
-		Point x = min(a, b, c);
-		return min(x, d);
-	}
-
-	private Point max(Point a, Point b) {
-		int results = a.compareTo(b);
-		if (results == -1)
-			return b;
-		else
-			return a;
-	}
-
-	private Point max(Point a, Point b, Point c) {
-		Point x = max(a, b);
-		return max(c, x);
-	}
-
-	private Point max(Point a, Point b, Point c, Point d) {
-		Point x = max(a, b, c);
-		return max(x, d);
 	}
 
 	private boolean containsDuplicates(Point[] points) {
