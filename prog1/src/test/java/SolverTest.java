@@ -52,7 +52,7 @@ public class SolverTest {
 			Solver solver = new Solver(initial);
 			
 			if (!solver.isSolvable())
-				StdOut.println("No solution possible");
+				StdOut.println("No solution possible :" + fileName);
 			else {
 				StdOut.println(fileName + "\r\nMinimum number of moves = " + solver.moves());
 //				for (Board board : solver.solution())
@@ -66,17 +66,64 @@ public class SolverTest {
 		}
 	}
 	
+//	@Test
+//	public void testSolvableFileName(){
+//		for (int i = 0; i <= 45; i++) {
+//			String formatted = String.format("%02d", i);
+//			String fileName = "puzzle" + formatted + ".txt";
+//			TestFile(fileName);
+//		}
+//	}
+	
 	@Test
-	public void testFileName(){
-		
-		for (int i = 0; i <= 50; i++) {
-			String formatted = String.format("%02d", i);
-			String fileName = "puzzle" + formatted + ".txt";
+	public void test_2x2_UnSolvableFileName(){
+		for (int i = 1; i <= 3; i++) {
+			String formatted = String.format("%01d", i);
+			String fileName = "puzzle2x2-unsolvable" + formatted + ".txt";
 			TestFile(fileName);
 		}
-		
-		
-		
+	}
+	
+	@Test
+	public void test_3x3_UnSolvableFileName(){
+		for (int i = 1; i <= 3; i++) {
+			String formatted = String.format("%01d", i);
+			String fileName = "puzzle3x3-unsolvable" + formatted + ".txt";
+			TestFile(fileName);
+		}
+	}
+	
+	@Test
+	public void test_4x4_UnSolvableFileName(){
+		String fileName = "puzzle4x4-unsolvable.txt";
+		TestFile(fileName);
+	}
+	
+	@Test
+	public void test_2x2_SolvableFileName(){
+		for (int i = 0; i <= 6; i++) {
+			String formatted = String.format("%02d", i);
+			String fileName = "puzzle2x2-" + formatted + ".txt";
+			TestFile(fileName);
+		}
+	}
+	
+	@Test
+	public void test_3x3_SolvableFileName(){
+		for (int i = 0; i <= 31; i++) {
+			String formatted = String.format("%02d", i);
+			String fileName = "puzzle3x3-" + formatted + ".txt";
+			TestFile(fileName);
+		}
+	}
+	
+	@Test
+	public void test_4x4_SolvableFileName(){
+		for (int i = 0; i <= 44; i++) {
+			String formatted = String.format("%02d", i);
+			String fileName = "puzzle4x4-" + formatted + ".txt";
+			TestFile(fileName);
+		}
 	}
 
 }

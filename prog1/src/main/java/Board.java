@@ -67,29 +67,29 @@ public class Board {
 		int manhattanCount = 0;
 		for (int i = 0; i < dim; i++) {
 			for (int j = 0; j < dim; j++) {
-
-				if (i == dim - 1 && j == dim - 1)
+				if (this.tiles[i][j] == EMPTY_SLOT)
 					continue;
-
-				int goal = goals[i][j];
-				int manhattanDistance = distanceFromGoal(goal, i, j);
+				
+				int manhattanDistance = distanceFromGoal(i,j);				
 				manhattanCount = manhattanCount + manhattanDistance;
 			}
 		}
 		return manhattanCount;
 	}
-
-	private int distanceFromGoal(int goal, int offsetX, int offsetY) {
-		int i = 0;
-		int j = 0;
-		for (i = 0; i < this.dimension(); i++) {
-			for (j = 0; j < this.dimension(); j++) {
-				if (tiles[i][j] == goal) {
-					return Math.abs(i - offsetX) + Math.abs(j - offsetY);
-				}
-			}
+	
+	private int distanceFromGoal(int i, int j){
+		int goal = this.tiles[i][j];
+		int x, y;
+		
+		int rem = goal % this.dimension();
+		if (rem == 0){
+			y = this.dimension() - 1;
+			x = goal / this.dimension() - 1;
+		} else {
+			y = rem - 1;
+			x = goal / this.dimension();
 		}
-		throw new NullPointerException();
+		return Math.abs(x - i) + Math.abs(y - j);
 	}
 
 	// is this board the goal board?
@@ -108,19 +108,13 @@ public class Board {
 
 	// a board that is obtained by exchanging any pair of blocks
 	public Board twin() {
-		int[][] tilesCopy = deepCopy(this.tiles);
-		
-		while(true){
-			int i = StdRandom.uniform(1, this.dimension());
-			int j = StdRandom.uniform(1, this.dimension());
-			if (!(tiles[i][j] == EMPTY_SLOT)){
-				exchTiles(tilesCopy, i, j, 0, 0);
-				break;
-			}
-		}
-		
-		Board b = new Board(tilesCopy);
-		return b;
+		int[][] aTwin = deepCopy(tiles);
+        if (aTwin[0][0] * aTwin[0][1] == 0) {
+            exchTiles(aTwin, 1, 0, 1, 1);
+        } else {
+        	exchTiles(aTwin, 0, 0, 0, 1);
+        }
+        return new Board(aTwin);
 	}
 
 	// does this board equal y?
