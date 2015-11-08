@@ -15,7 +15,7 @@ public class Solver {
 			this.board = b;
 			this.moves = moves;
 			this.prev = prev;
-			this.priority = b.manhattan();
+			this.priority = b.manhattan() + moves;
 		}
 
 		public int compareTo(SearchNode that) {
@@ -36,38 +36,29 @@ public class Solver {
 		MinPQ<SearchNode> pq = new MinPQ<Solver.SearchNode>();
 		pq.insert(new SearchNode(initial, 0, null));
 
-		
 		while (true) {
 			SearchNode minSn = pq.delMin();
-			
-			for (Board searchNode : minSn.board.neighbors()) {
-				
-				SearchNode sn = new SearchNode(searchNode, minSn.moves + 1 , minSn);
-				if (!sn.equals(minSn.board)){
-					pq.insert(sn);
-				}
+			Board currentBoard = minSn.board;
+			if ( currentBoard.isGoal()){
+				this.last = minSn;
+				this.moves = minSn.moves;
+				this.isSolvable = true;
+				break;
 			}
 			
-			if ( pq.min().board.isGoal()){
-				break;
+			for (Board nextBoard : minSn.board.neighbors()) {
+				if (minSn.prev == null || !nextBoard.equals(currentBoard)){
+					pq.insert(new SearchNode(nextBoard, minSn.moves + 1 , minSn));
+				}
 			}
 		}
 		
-		SearchNode solutionNode = pq.delMin();
-		this.moves = solutionNode.moves;
-		this.isSolvable = true;
-		Stack<Board> boards = new Stack<Board>();
-		SearchNode prev = solutionNode;
-		while( prev != null){
-			boards.push(prev.board);
-			prev = solutionNode.prev;
-		}
 		
 	}
 	
 	private boolean isSolvable = false;
 	private int moves = -1;
-	public Stack<Board> boards;
+	private SearchNode last;
 
 	// is the initial board solvable?
 	public boolean isSolvable() {
@@ -81,6 +72,12 @@ public class Solver {
 
 	// sequence of boards in a shortest solution; null if unsolvable
 	public Iterable<Board> solution() {
+		Stack<Board> boards = new Stack<Board>();
+		SearchNode prev = last;
+		while( prev != null){
+			boards.push(prev.board);
+			prev = prev.prev;
+		}
 		return boards;
 	}
 
