@@ -1,6 +1,10 @@
+package prog3;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import prog3.BruteCollinearPoints;
+import prog3.Point;
 
 
 public class BruteCollinearPointsTest {

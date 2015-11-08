@@ -1,8 +1,11 @@
+package prog3;
 import static org.junit.Assert.*;
 
 import java.util.Comparator;
 
 import org.junit.Test;
+
+import prog3.Point;
 
 
 public class PointTest {
@@ -127,7 +130,7 @@ public class PointTest {
 		double actual = p0.slopeTo(p1);
 		double expectedSlope = Double.POSITIVE_INFINITY;
 		
-		assertEquals(expectedSlope, actual, .001);
+		assertEquals(expectedSlope, actual, 0.000);
 	}
 	
 	@Test

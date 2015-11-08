@@ -1,3 +1,4 @@
+package prog3;
 /*************************************************************************
  *  Compilation:  javac LineSegment.java
  *  Execution:    none

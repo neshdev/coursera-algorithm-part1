@@ -1,3 +1,4 @@
+package prog3;
 /******************************************************************************
  *  Compilation:  javac Point.java
  *  Execution:    java Point
@@ -65,8 +66,15 @@ public class Point implements Comparable<Point> {
     	if ( this.compareTo(that) == 0)
     		return Double.NEGATIVE_INFINITY;
     	
+    	if ( this.y == that.y)
+    		return +0;
+    	
+    	if ( this.x == that.x)
+    		return Double.POSITIVE_INFINITY;
+    	
     	double deltaY = (that.y - this.y);
     	double deltaX = (that.x - this.x);
+    	    	
     	return deltaY/deltaX;
     }
 

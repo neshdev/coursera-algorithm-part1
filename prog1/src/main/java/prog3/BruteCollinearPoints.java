@@ -1,5 +1,7 @@
+package prog3;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
@@ -15,44 +17,34 @@ public class BruteCollinearPoints {
 			if (points[i] == null)
 				throw new NullPointerException();
 		}
+		
+		Point[] copy = Arrays.copyOf(points, points.length);
 
-		Arrays.sort(points);
+		Arrays.sort(copy);
 
-		if (containsDuplicates(points))
+		if (containsDuplicates(copy))
 			throw new IllegalArgumentException();
 
 		segments = new ArrayList<LineSegment>();
 
-		findSegments(points);
+		findSegments(copy);
 	}
 
 	private java.util.ArrayList<LineSegment> segments;
 
-	private void findSegments(Point[] points) {
-		for (int i = 0; i < points.length; i++) {
-			for (int j = 1; j < points.length; j++) {
-				for (int k = 2; k < points.length; k++) {
-					for (int l = 3; l < points.length; l++) {
-						Point p = points[i];
-						Point q = points[j];
-						Point r = points[k];
-						Point s = points[l];
-						double pq = p.slopeTo(q);
-						double pr = p.slopeTo(r);
-						double ps = p.slopeTo(s);
-						if (pq == pr || pq == ps || pr == ps) {
-							
-							Point[] arr = new Point[] { p,q,r,s};
-							Arrays.sort(arr);
-							Point min = arr[0];
-							Point max = arr[arr.length - 1];
-							LineSegment segment = new LineSegment(min, max);
-							segments.add(segment);
-						}
-					}
-				}
-			}
-		}
+	private void findSegments(Point[] pointsCopy) {
+		for (int p = 0; p < pointsCopy.length - 3; p++) {
+            for (int q = p + 1; q < pointsCopy.length - 2; q++) {
+                for (int r = q + 1; r < pointsCopy.length - 1; r++) {
+                    for (int s = r + 1; s < pointsCopy.length; s++) {
+                        if (pointsCopy[p].slopeTo(pointsCopy[q]) == pointsCopy[p].slopeTo(pointsCopy[r]) &&
+                                pointsCopy[p].slopeTo(pointsCopy[q]) == pointsCopy[p].slopeTo(pointsCopy[s])) {
+                        	segments.add(new LineSegment(pointsCopy[p], pointsCopy[s]));
+                        }
+                    }
+                }
+            }
+        }
 	}
 
 	private boolean containsDuplicates(Point[] points) {
@@ -68,7 +60,7 @@ public class BruteCollinearPoints {
 	}
 
 	public LineSegment[] segments() {
-		return (LineSegment[]) segments.toArray();
+		return segments.toArray(new LineSegment[segments.size()]);
 	}
 
 	public static void main(String[] args) {
