@@ -1,3 +1,4 @@
+package prog4;
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
@@ -7,6 +8,8 @@ import java.io.FileReader;
 
 import org.junit.Test;
 
+import prog4.Board;
+import prog4.Solver;
 import edu.princeton.cs.algs4.StdOut;
 
 

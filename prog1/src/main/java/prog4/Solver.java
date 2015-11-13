@@ -1,3 +1,4 @@
+package prog4;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
@@ -108,6 +109,8 @@ public class Solver {
 
 	// sequence of boards in a shortest solution; null if unsolvable
 	public Iterable<Board> solution() {
+		if (this.solvable == false) return null;
+		
 		Stack<Board> boards = new Stack<Board>();
 		SearchNode prev = last;
 		while( prev != null){
