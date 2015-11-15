@@ -16,6 +16,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdOut;
 
 public class RangeSearchVisualizer {
 
@@ -33,6 +34,7 @@ public class RangeSearchVisualizer {
             double x = in.readDouble();
             double y = in.readDouble();
             Point2D p = new Point2D(x, y);
+            StdOut.println(p);
             kdtree.insert(p);
             brute.insert(p);
         }
